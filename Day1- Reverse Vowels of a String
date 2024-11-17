@@ -1,0 +1,20 @@
+var reverseVowels = function(s) {
+
+    while (left < right) {
+        // Move left pointer until it points to a vowel
+        while (left < right && !vowels.has(arr[left])) {
+            left++;
+        }
+
+        // Move right pointer until it points to a vowel
+        while (left < right && !vowels.has(arr[right])) {
+            right--;
+        }
+
+        [arr[left], arr[right]] = [arr[right], arr[left]];
+        left++;
+        right--;
+    }
+    return arr.join('');
+     //tc-O(n),sc-O(n)
+};
