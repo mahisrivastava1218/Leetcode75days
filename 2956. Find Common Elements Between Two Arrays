@@ -1,0 +1,64 @@
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var findIntersectionValues = function(nums1, nums2) {
+    //arr=[2,3,2] = [1,2]=[2]
+    //check for both array if includes count++ for both
+    // let count=0;
+    // let count1=0;
+    // for(let i=0;i<nums1.length;i++){
+    //     if(nums2.includes(nums1[i])){
+    //         count++;
+    //     }
+    // }
+    // for(let i=0;i<nums2.length;i++){
+    //     if(nums1.includes(nums2[i])){
+    //         count1++;
+    //     }
+    // }
+    // let res=[];
+    // res.push(count,count1);
+    // return res;
+    //by hashing - map- [2-2,3-1] if map[key] includes in nums2 
+    //optimize
+    let nums2set = new Set(nums2);
+    const map = new Map();
+    for(let i=0;i<nums1.length;i++){
+        if(map.has(nums1[i])){
+            map.set(nums1[i],map.get(nums1[i])+1);
+        }else{
+            map.set(nums1[i],1);
+        }
+    }
+    console.log(map);
+    let count =0;
+    for(let nums of nums2set){
+           if(map.has(nums)){
+                count += map.get(nums);
+                console.log(count);
+           }
+     }
+    let nums1set = new Set(nums1);
+    const map1 = new Map();
+    for(let i=0;i<nums2.length;i++){
+        if(map1.has(nums2[i])){
+            map1.set(nums2[i],map1.get(nums2[i])+1);
+        }else{
+            map1.set(nums2[i],1);
+        }
+    }
+    console.log(map);
+    let count1=0;
+    for(let num of nums1set){
+           if(map1.has(num)){
+                count1 += map1.get(num);
+                console.log(count1);
+           }
+     }
+    let res=[];
+    res.push(count,count1);
+    return res;
+    //tc and sc- O(n+m)
+};
