@@ -1,0 +1,33 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    //for arr[i] if(arr[i])
+    //let i=0;i<nums.length;i++ if(nums[i]+nums[i+1] === target) return []
+    // //first go i=0 then all n values if condition not met then i++;
+    // for(let i=0;i<nums.length;i++){
+    //     for(let j=i+1; j<nums.length;j++){
+    //         if(nums[i] + nums[j] === target){
+    //             return [i,j];
+    //         }
+            
+    //     }
+
+    // }
+    // return [-1,-1];
+    //O(n^2)
+    //map 
+    const map = new Map();
+    for(let i=0;i<nums.length;i++){
+        let lefttarget = target-nums[i];
+        if(map.has(lefttarget)){
+            return [map.get(lefttarget),i]
+        }
+        map.set(nums[i],i);
+    }
+    //map - lefttarget- 9-2=7 2,0 2,0 [0,1]
+    return [-1,-1];
+    //tc-O(n) sc-O(n)
+};
