@@ -1,0 +1,20 @@
+var vowelStrings = function(words, queries) {
+    const isVowel = (char) => ['a', 'e', 'i', 'o', 'u'].includes(char);
+
+    let prefix = Array(words.length + 1).fill(0);
+    for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        if (word && isVowel(word[0]) && isVowel(word[word.length - 1])) {
+            prefix[i + 1] = prefix[i] + 1;
+        } else {
+            prefix[i + 1] = prefix[i];
+        }
+    }
+
+    let result = [];
+    for (let [start, end] of queries) {
+        result.push(prefix[end + 1] - prefix[start]);
+    }
+
+    return result;
+};
