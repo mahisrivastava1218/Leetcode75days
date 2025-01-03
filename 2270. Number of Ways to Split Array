@@ -1,0 +1,18 @@
+var waysToSplitArray = function(nums) {
+  const sum=nums.reduce((accumulator,currentvalue)=> accumulator+currentvalue,0);
+  let left=0;
+  let prevsum=0, currsum=0, count=0;
+  while(left<nums.length-1){
+     currsum += nums[left];
+     prevsum = sum - currsum;
+     if(currsum>=prevsum){
+      count++;
+     }
+     left++;
+  }
+  return count;
+};
+//tc-O(n) SC-O(1)
+console.log(waysToSplitArray([10,4,-8,7]));
+console.log(waysToSplitArray([2,3,1,0]));
+console.log(waysToSplitArray([1,4,1,4]));
