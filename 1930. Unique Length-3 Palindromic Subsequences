@@ -1,0 +1,56 @@
+var countPalindromicSubsequence  = function(s) {
+  let start=0;
+  let mid=1;
+  let end=2;
+  let count=0;
+  const set = new Set();
+  while(start<s.length-2){
+      let newstr= s[start]+s[mid]+s[end];
+      if(newstr[0] === newstr[2]){
+        if(!set.has(newstr)){
+          set.add(newstr);
+          count++;
+        }
+      }
+      end++;
+      if(end === s.length){
+        mid++;
+        end=mid+1;
+      }
+      if(mid === s.length-1){
+        start++;
+        mid=start+1;
+        end=mid+1;
+      }
+  }
+  return count;
+};
+//tc-O(n^3) SC-O(n^3)
+//optimize
+
+var countPalindromicSubsequence = function(s) {
+  const leftset = new Set();
+  const map = new Map();
+  const set=new Set();
+  for(const char of s){
+    map.set(char, (map.get(char) || 0)+1);
+  }
+  for(let i=0;i<s.length;i++){
+  const midChar = s[i];
+  map.set(midChar, map.get(midChar)-1);
+  if(map.get(midChar) === 0) map.delete(midChar);
+  for(const char of leftset){
+    if(map.has(char)){
+      set.add(char+ midChar+ char);
+    }
+  }
+  leftset.add(midChar);
+  }
+  return set.size;
+};
+
+//tc-O(n) sc-O(n)
+//testcase
+console.log(countPalindromicSubsequence("aabca"));
+console.log(countPalindromicSubsequence("adc"));
+console.log(countPalindromicSubsequence("bbcbaba"));
