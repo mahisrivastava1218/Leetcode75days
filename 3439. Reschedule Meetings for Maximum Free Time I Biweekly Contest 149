@@ -1,0 +1,30 @@
+var maxFreeTime = function(eventTime, k, startTime, endTime) {
+    let n = startTime.length;
+    let gaps = [];
+    gaps.push(startTime[0]); 
+    for (let i = 1; i < n; i++) {
+        gaps.push(startTime[i] - endTime[i - 1]); 
+    }
+    gaps.push(eventTime - endTime[n - 1]); 
+
+    //Use a sliding window of size K+1 to find max sum of consecutive gaps
+    let maxFree = 0;
+    let windowSum = 0;
+
+    // Initialize the first window sum
+    for (let i = 0; i <= k && i < gaps.length; i++) {
+        windowSum += gaps[i];
+    }
+    maxFree = windowSum;
+    // Slide the window
+    for (let i = k + 1; i < gaps.length; i++) {
+        windowSum += gaps[i] - gaps[i - (k + 1)];
+        console.log(windowSum);
+        maxFree = Math.max(maxFree, windowSum);
+        
+    }
+
+    return maxFree;
+};
+console.log(maxFreeTime(10,1,[0,2,9],[1,4,10]));
+console.log(maxFreeTime(21,1,[7,10,16],[10,14,18]));
