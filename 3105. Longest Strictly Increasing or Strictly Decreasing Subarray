@@ -1,0 +1,78 @@
+
+//bruite force
+var longestMonotonicSubarray = function(nums) {
+    let inc= 1;
+    for(let i=0;i<nums.length;i++){
+        let left =i;
+        let right=left+1;
+        let res=[];
+        res.push(nums[i]);
+      while(left<nums.length){
+        if(nums[right]>nums[left]){
+            res.push(nums[right]);
+            // console.log(res);
+            right++;
+            left++;
+        }else{
+            if(res.length>inc){
+                inc=res.length;
+            }
+            // console.log(inc);
+            break;
+          }
+        }
+    }
+    let dec=1;
+    for(let i=0;i<nums.length;i++){
+        let left =i;
+        let right=left+1;
+        let res=[];
+        res.push(nums[i]);
+      while(left<nums.length){
+        if(nums[right]<nums[left]){
+            res.push(nums[right]);
+            // console.log(res);
+            right++;
+            left++;
+        }else{
+            if(res.length>dec){
+                dec=res.length;
+            }
+            // console.log(dec);
+            break;
+          }
+        }
+    }
+    return Math.max(inc,dec);
+};
+//time complexity-O(n^2) space complexity-O(n)
+//optimize single-pass approach
+var longestMonotonicSubarray = function(nums) {
+    let inc= 1;
+    let maxIncSubarr=1;
+    let dec= 1;
+    let maxDecSubarr=1;
+    for(let i=0;i<nums.length;i++){
+         if(nums[i]>nums[i-1]){
+           inc += 1;
+           maxIncSubarr = Math.max(maxIncSubarr,inc);
+        }else{
+           inc =1;
+        }
+
+        //decreasing seq
+        if(nums[i]<nums[i-1]){
+            dec += 1;
+            maxDecSubarr = Math.max(maxDecSubarr,dec);
+         }else{
+            dec =1;
+         }
+        
+    }
+   
+    return Math.max(maxIncSubarr,maxDecSubarr);
+};
+//time complexity-O(n) space complexity-O(1);
+
+console.log(longestMonotonicSubarray([1,4,3,3,2]));
+
