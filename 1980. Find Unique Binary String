@@ -1,0 +1,7 @@
+var findDifferentBinaryString = function(nums) {
+    let newstr='';
+    for(let i=0;i<nums.length;i++){
+        newstr += nums[i][i]^1;
+    }
+    return newstr;
+};
