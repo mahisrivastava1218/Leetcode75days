@@ -1,0 +1,25 @@
+function constructTreeUtil(pre, post, preIndex, l, h) {
+    if (preIndex[0] >= pre.length || l > h) {
+        return null;
+    }
+    const root = new TreeNode(pre[preIndex[0]]);
+    preIndex[0]++;
+    if(l===h){
+        return root;
+    }
+    let i;
+    for(i=l;i<=h;i++){
+        if(pre[preIndex[0]] === post[i]){
+            break;
+        }
+    }
+    if(i<=h){
+        root.left = constructTreeUtil(pre,post,preIndex,l,i);
+        root.right = constructTreeUtil(pre,post,preIndex,i+1,h-1);
+    }
+    return root;
+ }
+var constructFromPrePost = function(preorder, postorder) {
+      const preIndex = [ 0 ];
+    return constructTreeUtil(preorder,postorder,preIndex,0,postorder.length-1);
+};
