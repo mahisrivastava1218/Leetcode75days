@@ -1,0 +1,29 @@
+var mergeArrays = function(nums1, nums2) {
+    if(nums2.length === 0) return nums1;
+    if(nums1.length === 0) return nums2;
+    // const map = new Map();
+    // for(let ch of nums1){
+    //     map.set(ch[0],ch[1]);
+    // }
+    // for(let char of nums2){
+    //     if(map.has(char[0])){
+    //         map.set(char[0],char[1]+map.get(char[0]));
+    //     }else{
+    //         map.set(char[0],char[1]);
+    //     }
+    // }
+    // let res=[];
+    // for(let [key,val] of map){
+    //   res.push([key,val]);
+    // }
+    // res.sort((a,b)=>a[0]-b[0]);
+    // return res;
+//same approach and method
+    const map = new Map();
+    for(let arr of [...nums1,...nums2]){
+        map.set(arr[0],(map.get(arr[0])||0)+arr[1]);
+    }
+    console.log(map);
+    return [...map.entries()].sort((a,b)=>a[0]-b[0]);
+};
+//tc:O((n+m)log(n+m)) sc:O(n+m);
