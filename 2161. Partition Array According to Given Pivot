@@ -1,0 +1,8 @@
+       let start=[], mid=[], end=[];
+        for(let num of nums){
+            if(num<pivot) start.push(num);
+            else if(num===pivot) mid.push(num);
+            else end.push(num);
+        }
+        return [...start,...mid,...end];
+    };
