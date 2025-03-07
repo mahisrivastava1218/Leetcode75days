@@ -1,0 +1,28 @@
+var findMissingAndRepeatedValues = function(grid) {
+    let ans=[];
+    const map=new Map();
+  for(let i=0;i<grid.length;i++){
+    for(let j=0;j<grid.length;j++){
+        let x = grid[i][j];
+        if(map.has(x)){
+            ans[0]=x;
+        }
+        map.set(x,1);
+    }
+  }
+  let arr = [...map.keys()];
+  arr.sort((a,b)=>a-b);
+  if(arr[0]!==1){
+    ans[1]=1;
+    return ans;
+  }
+  for(let i=1;i<arr.length;i++){
+    if(arr[i] !== arr[i-1]+1){
+        ans[1]=arr[i]-1;
+        return ans;
+    }
+  }
+  ans[1]=arr[arr.length-1]+1;
+  return ans;
+};
+tc:O(n^2) SC:O(n^2)
