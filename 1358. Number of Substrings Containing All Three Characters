@@ -1,0 +1,9 @@
+ let d = [-1, -1, -1];
+    let ans = 0;
+    
+    for (let i = 0; i < s.length; i++) {
+        d[s.charCodeAt(i) - 'a'.charCodeAt(0)] = i;
+        ans += Math.min(d[0], Math.min(d[1], d[2])) + 1;
+    }
+    
+    return ans;
