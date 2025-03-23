@@ -1,0 +1,36 @@
+ Ques-1976. Number of Ways to Arrive at Destination
+
+var countPaths = function(n, roads)  {
+    const MOD = 1e9 + 7;
+    const graph = Array.from({ length: n }, () => []);
+    for (let [u, v, time] of roads) {
+        graph[u].push([v, time]);
+        graph[v].push([u, time]);
+    }
+
+    const dist = Array(n).fill(Infinity);
+    const ways = Array(n).fill(0);
+    dist[0] = 0;
+    ways[0] = 1;
+    const heap = [[0, 0]]; 
+    while (heap.length > 0) {
+        heap.sort((a, b) => a[0] - b[0]);
+        const [currDist, node] = heap.shift();
+
+        if (currDist > dist[node]) continue;
+
+        for (const [nextNode, time] of graph[node]) {
+            const newDist = currDist + time;
+
+            if (newDist < dist[nextNode]) {
+                dist[nextNode] = newDist;
+                ways[nextNode] = ways[node] % MOD;
+                heap.push([newDist, nextNode]);
+            } else if (newDist === dist[nextNode]) {
+                ways[nextNode] = (ways[nextNode] + ways[node]) % MOD;
+            }
+        }
+    }
+
+    return ways[n - 1] % MOD;
+}
