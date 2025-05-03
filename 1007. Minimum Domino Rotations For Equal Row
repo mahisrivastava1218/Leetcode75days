@@ -46,3 +46,26 @@ var minDominoRotations = function(tops, bottoms) {
     //tc: O(2n*6)=>O(12n)->O(n)
     //SC->O(n)
 };
+//optimize 
+var minDominoRotations = function(tops, bottoms) {
+    let minCount=Infinity;
+    for(let i=1;i<=6;i++){
+        let topRotation=0;
+        let bottomRotation=0;
+        let canMake=true;
+        for(let j=0;j<tops.length;j++){
+           if(tops[j]!==i && bottoms[j]!==i){
+               canMake=false;
+               break;
+           }else if(tops[j]!==i){
+            topRotation++;
+           }else if(bottoms[j]!==i){
+            bottomRotation++;
+           }
+        }
+        if(canMake)minCount = Math.min(minCount,topRotation);
+        if(canMake)minCount = Math.min(minCount,bottomRotation);
+    }
+    return minCount === Infinity ? -1 : minCount;
+};
+//tc:O(n) sc:O(1)
