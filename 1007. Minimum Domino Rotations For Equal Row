@@ -1,0 +1,48 @@
+//Bruite force
+var minDominoRotations = function(tops, bottoms) {
+    let minCount=+Infinity;
+    for(let i=1;i<=6;i++){
+        let res=[];
+        let count=0;
+        for(let j=0;j<tops.length;j++){
+           if(tops[j]!==i){
+               res[j]=bottoms[j];
+               count++;
+           }else{
+            res[j]=i;
+           }
+        }
+        // console.log(count);
+        for(let j=0;j<res.length;j++){
+            if(res[j]!==i){
+                break;
+            }else if(j==res.length-1 && res[j]==i){
+                if(minCount>count){
+                    minCount=count;
+                }
+            }
+        }
+        count=0;
+        for(let j=0;j<bottoms.length;j++){
+           if(bottoms[j]!==i){
+               res[j]=tops[j];
+               count++;
+           }else{
+            res[j]=i;
+           }
+        }
+        // console.log(count);
+        for(let j=0;j<res.length;j++){
+            if(res[j]!==i){
+                break;
+            }else if(j==res.length-1 && res[j]==i){
+                if(minCount>count){
+                    minCount=count;
+                }
+            }
+        }
+    }
+    return minCount === Infinity ? -1 : minCount;
+    //tc: O(2n*6)=>O(12n)->O(n)
+    //SC->O(n)
+};
