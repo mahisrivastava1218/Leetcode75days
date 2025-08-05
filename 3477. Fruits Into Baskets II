@@ -1,0 +1,25 @@
+/**
+ * @param {number[]} fruits
+ * @param {number[]} baskets
+ * @return {number}
+ */
+var numOfUnplacedFruits = function(fruits, baskets) {
+    let array = new Array(baskets.length).fill(true);
+    for(let i=0;i<fruits.length;i++){
+       for(let j=0;j<baskets.length;j++){
+          if(array[j]===true && baskets[j]>=fruits[i]){
+               array[j]=false;
+                break;
+            }
+       }
+    }
+
+    let count=0;
+    for(let i=0;i<array.length;i++){
+        if(array[i]===true){
+            count++;
+        }
+    }
+    return count;
+}
+//tc-O(n^2) sc-O(n)
