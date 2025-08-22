@@ -1,0 +1,23 @@
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var minimumArea = function(grid) {
+    let m=grid.length;
+    let n=grid[0].length;
+    let maxrow=0, maxcol=0;
+    let minrow=m, mincol=n;
+    for(let i=0;i<m;i++){
+        for(let j=0;j<n;j++){
+            if(grid[i][j]===1){
+            minrow=Math.min(minrow,i);
+            mincol=Math.min(mincol,j);
+            maxrow=Math.max(maxrow,i);
+            maxcol=Math.max(maxcol,j);
+            }
+        }
+    }
+    let width=maxrow-minrow+1;
+    let length=maxcol-mincol+1;
+    return width*length;
+};
